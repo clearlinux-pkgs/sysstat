@@ -1,0 +1,5 @@
+--disable-sensors
+--enable-nls
+--disable-file-attr
+--disable-install-cron
+--disable-stripping
