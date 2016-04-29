@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 11.3.3
-Release  : 19
+Release  : 20
 URL      : http://pagesperso-orange.fr/sebastien.godard/sysstat-11.3.3.tar.bz2
 Source0  : http://pagesperso-orange.fr/sebastien.godard/sysstat-11.3.3.tar.bz2
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
