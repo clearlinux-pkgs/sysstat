@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 11.5.2
-Release  : 25
+Release  : 26
 URL      : http://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.2.tar.bz2
 Source0  : http://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.2.tar.bz2
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
@@ -66,6 +66,7 @@ locales components for the sysstat package.
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1484453886
 %configure --disable-static --disable-sensors \
 --enable-nls \
 --disable-file-attr \
@@ -74,6 +75,7 @@ export LANG=C
 make V=1  %{?_smp_mflags}
 
 %install
+export SOURCE_DATE_EPOCH=1484453886
 rm -rf %{buildroot}
 %make_install
 %find_lang sysstat
@@ -102,6 +104,6 @@ rm -rf %{buildroot}
 %doc /usr/share/man/man5/*
 %doc /usr/share/man/man8/*
 
-%files locales -f sysstat.lang 
+%files locales -f sysstat.lang
 %defattr(-,root,root,-)
 
