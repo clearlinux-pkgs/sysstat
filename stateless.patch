@@ -16,9 +16,9 @@ Index: sysstat-11.1.3/Makefile.in
 --- sysstat-11.1.3.orig/Makefile.in	2015-03-18 16:03:27.122280583 +0000
 +++ sysstat-11.1.3/Makefile.in	2015-03-18 16:03:47.710281193 +0000
 @@ -355,7 +355,7 @@
- ifeq ($(INSTALL_ISAG),y)
- 	$(INSTALL_BIN) contrib/isag/isag $(DESTDIR)$(BIN_DIR)
- endif
+ 	$(INSTALL_BIN) mpstat $(DESTDIR)$(BIN_DIR)
+ 	$(INSTALL_BIN) pidstat $(DESTDIR)$(BIN_DIR)
+ 	$(INSTALL_BIN) cifsiostat $(DESTDIR)$(BIN_DIR)
 -	$(INSTALL_DATA) sysstat.ioconf $(DESTDIR)$(SYSCONFIG_DIR)
 +	$(INSTALL_DATA) sysstat.ioconf $(DESTDIR)$(SA_LIB_DIR)
  	$(INSTALL_DATA) sysstat.sysconfig $(DESTDIR)$(SYSCONFIG_DIR)/sysstat

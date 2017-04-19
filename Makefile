@@ -1,5 +1,5 @@
 PKG_NAME := sysstat
-URL := http://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.2.tar.bz2
+URL := https://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.5.tar.bz2
 
 
 include ../common/Makefile.common
