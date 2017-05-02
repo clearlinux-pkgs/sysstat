@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 11.5.5
-Release  : 27
+Release  : 28
 URL      : https://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.5.tar.bz2
 Source0  : https://pagesperso-orange.fr/sebastien.godard/sysstat-11.5.5.tar.bz2
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
