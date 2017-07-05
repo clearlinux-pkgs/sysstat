@@ -1,0 +1,8 @@
+Configure miss: chkconfig
+Configure miss: sensors support
+Configure miss: sensors_get_detected_chips in -lsensors
+Configure miss: sensors lib
+Configure miss: whether manual pages should be compressed
+Configure miss: whether system activity directory should be cleaned
+Configure miss: whether cron should start sar automatically
+Configure miss: whether object files should be stripped
