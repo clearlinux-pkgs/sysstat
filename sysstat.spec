@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 11.7.1
-Release  : 34
+Release  : 35
 URL      : https://github.com/sysstat/sysstat/archive/v11.7.1.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v11.7.1.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
