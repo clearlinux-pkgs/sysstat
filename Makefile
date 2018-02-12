@@ -1,5 +1,5 @@
 PKG_NAME := sysstat
-URL = https://github.com/sysstat/sysstat/archive/v11.7.1.tar.gz
-
+URL = https://github.com/sysstat/sysstat/archive/v11.7.2.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common
