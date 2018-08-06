@@ -1,4 +1,4 @@
-12.0.0
+12.0.1
 systemd
-pkgconfig(systemd)
 systemd-dev
+pkgconfig(systemd)
