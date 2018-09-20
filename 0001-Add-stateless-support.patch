@@ -1,0 +1,83 @@
+From 15ad9048c0e414ce534938ce4859a417e8ab3a38 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 20 Sep 2018 12:22:28 -0700
+Subject: [PATCH] Add stateless support
+
+---
+ ioconf.c     | 16 +++++++++++-----
+ sa1.in       |  3 ++-
+ sa2.in       |  3 ++-
+ sysconfig.in |  1 +
+ 4 files changed, 16 insertions(+), 7 deletions(-)
+
+diff --git a/ioconf.c b/ioconf.c
+index 940b0c5..4420527 100644
+--- a/ioconf.c
++++ b/ioconf.c
+@@ -150,13 +150,19 @@ int ioc_init(void)
+ 	struct blk_config *blkp = NULL;
+ 	char ioconf_name[64];
+ 
+-	if ((fp = fopen(IOCONF, "r")) == NULL) {
+-		if ((fp = fopen(LOCAL_IOCONF, "r")) == NULL)
+-			return 0;
+-		strncpy(ioconf_name, LOCAL_IOCONF, 64);
++	if ((fp = fopen(ETC_IOCONF, "r")) == NULL) {
++		if ((fp = fopen(IOCONF, "r")) == NULL) {
++			if ((fp = fopen(LOCAL_IOCONF, "r")) == NULL) {
++				return 0;
++			} else {
++				strncpy(ioconf_name, LOCAL_IOCONF, 64);
++                        }
++                } else {
++                        strncpy(ioconf_name, IOCONF, 64);
++                }
+ 	}
+ 	else {
+-		strncpy(ioconf_name, IOCONF, 64);
++		strncpy(ioconf_name, ETC_IOCONF, 64);
+ 	}
+ 	ioconf_name[63] = '\0';
+ 
+diff --git a/sa1.in b/sa1.in
+index 42d16b3..fd52e99 100644
+--- a/sa1.in
++++ b/sa1.in
+@@ -14,7 +14,8 @@ SA_DIR=@SA_DIR@
+ SYSCONFIG_DIR=@SYSCONFIG_DIR@
+ umask 0022
+ 
+-[ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
++[ -r /etc/sysstat ] && . /etc/sysstat
++[ ! -r /etc/sysstat ] && [ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
+ [ -d ${SA_DIR} ] || SA_DIR=@SA_DIR@
+ 
+ if [ ${HISTORY} -gt 28 ]
+diff --git a/sa2.in b/sa2.in
+index 4dcf06c..ce42a81 100644
+--- a/sa2.in
++++ b/sa2.in
+@@ -16,7 +16,8 @@ COMPRESSAFTER=@COMPRESSAFTER@
+ ZIP="@ZIP@"
+ 
+ # Read configuration file, overriding variables set above
+-[ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
++[ -r /etc/sysstat ] && . /etc/sysstat
++[ ! -r /etc/sysstat ] && [ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
+ 
+ [ -d ${SA_DIR} ] || SA_DIR=@SA_DIR@
+ 
+diff --git a/sysconfig.in b/sysconfig.in
+index 03d9c0a..b161206 100644
+--- a/sysconfig.in
++++ b/sysconfig.in
+@@ -9,5 +9,6 @@
+ /* sysstat configuration directory */
+ #define IOCONF		"@SYSCONFIG_DIR@/sysstat.ioconf"
+ #define LOCAL_IOCONF	"./sysstat.ioconf"
++#define ETC_IOCONF	"/etc/sysstat.ioconf"
+ 
+ #endif  /* _SYSCONFIG_H */
+-- 
+2.19.0
+

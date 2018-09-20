@@ -4,20 +4,22 @@
 #
 Name     : sysstat
 Version  : 12.0.1
-Release  : 41
+Release  : 44
 URL      : https://github.com/sysstat/sysstat/archive/v12.0.1.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.0.1.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sysstat-bin
+Requires: sysstat-config
+Requires: sysstat-data
 Requires: sysstat-license
 Requires: sysstat-locales
 Requires: sysstat-man
 BuildRequires : pkgconfig(systemd)
 BuildRequires : systemd
 BuildRequires : systemd-dev
-Patch1: stateless.patch
+Patch1: 0001-Add-stateless-support.patch
 
 %description
 The sysstat package contains the sar, sadf, mpstat, iostat, tapestat,
@@ -40,17 +42,35 @@ The cifsiostat command reports I/O statistics for CIFS filesystems.
 %package bin
 Summary: bin components for the sysstat package.
 Group: Binaries
-Requires: sysstat-license
-Requires: sysstat-man
+Requires: sysstat-data = %{version}-%{release}
+Requires: sysstat-config = %{version}-%{release}
+Requires: sysstat-license = %{version}-%{release}
+Requires: sysstat-man = %{version}-%{release}
 
 %description bin
 bin components for the sysstat package.
 
 
+%package config
+Summary: config components for the sysstat package.
+Group: Default
+
+%description config
+config components for the sysstat package.
+
+
+%package data
+Summary: data components for the sysstat package.
+Group: Data
+
+%description data
+data components for the sysstat package.
+
+
 %package doc
 Summary: doc components for the sysstat package.
 Group: Documentation
-Requires: sysstat-man
+Requires: sysstat-man = %{version}-%{release}
 
 %description doc
 doc components for the sysstat package.
@@ -89,12 +109,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1533582896
+export SOURCE_DATE_EPOCH=1537472784
 %configure --disable-static --disable-sensors \
 --enable-nls \
 --disable-file-attr \
 --disable-install-cron \
---disable-stripping
+--disable-stripping \
+conf_dir=/usr/share/defaults/sysstat
 make  %{?_smp_mflags}
 
 %check
@@ -105,11 +126,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make TEST_VERBOSE=1 test
 
 %install
-export SOURCE_DATE_EPOCH=1533582896
+export SOURCE_DATE_EPOCH=1537472784
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/sysstat
 cp COPYING %{buildroot}/usr/share/doc/sysstat/COPYING
-%make_install
+DESTDIR=%{buildroot} make install_all
 %find_lang sysstat
 
 %files
@@ -117,7 +138,6 @@ cp COPYING %{buildroot}/usr/share/doc/sysstat/COPYING
 /usr/lib64/sa/sa1
 /usr/lib64/sa/sa2
 /usr/lib64/sa/sadc
-/usr/lib64/sa/sysstat.ioconf
 
 %files bin
 %defattr(-,root,root,-)
@@ -129,14 +149,31 @@ cp COPYING %{buildroot}/usr/share/doc/sysstat/COPYING
 /usr/bin/sar
 /usr/bin/tapestat
 
+%files config
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/sysstat-collect.service
+/usr/lib/systemd/system/sysstat-collect.timer
+/usr/lib/systemd/system/sysstat-summary.service
+/usr/lib/systemd/system/sysstat-summary.timer
+/usr/lib/systemd/system/sysstat.service
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/defaults/sysstat/sysstat
+/usr/share/defaults/sysstat/sysstat.ioconf
+
 %files doc
 %defattr(0644,root,root,0755)
-%doc /usr/share/doc/sysstat/*
+/usr/share/doc/sysstat-12.0.1/CHANGES
+/usr/share/doc/sysstat-12.0.1/CREDITS
+/usr/share/doc/sysstat-12.0.1/FAQ.md
+/usr/share/doc/sysstat-12.0.1/README.md
+/usr/share/doc/sysstat-12.0.1/sysstat-12.0.1.lsm
 
 %files license
 %defattr(-,root,root,-)
+/usr/share/doc/sysstat-12.0.1/COPYING
 /usr/share/doc/sysstat/COPYING
-/usr/share/doc/sysstat/sysstat-12.0.1/COPYING
 
 %files man
 %defattr(-,root,root,-)

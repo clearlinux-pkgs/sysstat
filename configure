@@ -3,3 +3,4 @@
 --disable-file-attr
 --disable-install-cron
 --disable-stripping
+conf_dir=/usr/share/defaults/sysstat
