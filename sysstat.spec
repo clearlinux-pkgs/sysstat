@@ -4,22 +4,23 @@
 #
 Name     : sysstat
 Version  : 12.1.1
-Release  : 45
+Release  : 46
 URL      : https://github.com/sysstat/sysstat/archive/v12.1.1.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.1.1.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sysstat-bin = %{version}-%{release}
-Requires: sysstat-config = %{version}-%{release}
 Requires: sysstat-data = %{version}-%{release}
 Requires: sysstat-license = %{version}-%{release}
 Requires: sysstat-locales = %{version}-%{release}
 Requires: sysstat-man = %{version}-%{release}
+Requires: sysstat-services = %{version}-%{release}
 BuildRequires : pkgconfig(systemd)
 BuildRequires : systemd
 BuildRequires : systemd-dev
 Patch1: 0001-Add-stateless-support.patch
+Patch2: CVE-2018-19416.patch
 
 %description
 The sysstat package contains the sar, sadf, mpstat, iostat, tapestat,
@@ -43,20 +44,12 @@ The cifsiostat command reports I/O statistics for CIFS filesystems.
 Summary: bin components for the sysstat package.
 Group: Binaries
 Requires: sysstat-data = %{version}-%{release}
-Requires: sysstat-config = %{version}-%{release}
 Requires: sysstat-license = %{version}-%{release}
 Requires: sysstat-man = %{version}-%{release}
+Requires: sysstat-services = %{version}-%{release}
 
 %description bin
 bin components for the sysstat package.
-
-
-%package config
-Summary: config components for the sysstat package.
-Group: Default
-
-%description config
-config components for the sysstat package.
 
 
 %package data
@@ -100,16 +93,29 @@ Group: Default
 man components for the sysstat package.
 
 
+%package services
+Summary: services components for the sysstat package.
+Group: Systemd services
+
+%description services
+services components for the sysstat package.
+
+
 %prep
 %setup -q -n sysstat-12.1.1
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539444089
+export SOURCE_DATE_EPOCH=1543263176
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --disable-sensors \
 --enable-nls \
 --disable-file-attr \
@@ -126,7 +132,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make TEST_VERBOSE=1 test
 
 %install
-export SOURCE_DATE_EPOCH=1539444089
+export SOURCE_DATE_EPOCH=1543263176
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sysstat
 cp COPYING %{buildroot}/usr/share/package-licenses/sysstat/COPYING
@@ -148,14 +154,6 @@ DESTDIR=%{buildroot} make install_all
 /usr/bin/sadf
 /usr/bin/sar
 /usr/bin/tapestat
-
-%files config
-%defattr(-,root,root,-)
-/usr/lib/systemd/system/sysstat-collect.service
-/usr/lib/systemd/system/sysstat-collect.timer
-/usr/lib/systemd/system/sysstat-summary.service
-/usr/lib/systemd/system/sysstat-summary.timer
-/usr/lib/systemd/system/sysstat.service
 
 %files data
 %defattr(-,root,root,-)
@@ -188,6 +186,14 @@ DESTDIR=%{buildroot} make install_all
 /usr/share/man/man8/sa1.8
 /usr/share/man/man8/sa2.8
 /usr/share/man/man8/sadc.8
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/sysstat-collect.service
+/usr/lib/systemd/system/sysstat-collect.timer
+/usr/lib/systemd/system/sysstat-summary.service
+/usr/lib/systemd/system/sysstat-summary.timer
+/usr/lib/systemd/system/sysstat.service
 
 %files locales -f sysstat.lang
 %defattr(-,root,root,-)
