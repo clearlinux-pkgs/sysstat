@@ -1,3 +1,4 @@
+Configure miss: json_verify
 Configure miss: chkconfig
 Configure miss: sensors support
 Configure miss: sensors_get_detected_chips in -lsensors
