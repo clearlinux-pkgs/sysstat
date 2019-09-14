@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 12.1.6
-Release  : 52
+Release  : 53
 URL      : https://github.com/sysstat/sysstat/archive/v12.1.6/sysstat-12.1.6.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.1.6/sysstat-12.1.6.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
