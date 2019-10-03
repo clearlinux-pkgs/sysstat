@@ -44,13 +44,13 @@ diff --git a/sa1.in b/sa1.in
 index 79ed60c..0f3d634 100644
 --- a/sa1.in
 +++ b/sa1.in
-@@ -14,7 +14,8 @@ SA_DIR=@SA_DIR@
- SYSCONFIG_DIR=@SYSCONFIG_DIR@
+@@ -15,7 +15,8 @@ SA_DIR=@SA_DIR@
+ SYSCONFIG_FILE=@SYSCONFIG_FILE@
  UMASK=0022
  
--[ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
-+[ -r /etc/sysstat ] && . /etc/sysstat
-+[ ! -r /etc/sysstat ] && [ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
+-[ -r ${SYSCONFIG_DIR}/${SYSCONFIG_FILE} ] && . ${SYSCONFIG_DIR}/${SYSCONFIG_FILE}
++[ -r /etc/${SYSCONFIG_FILE} ] && . /etc/${SYSCONFIG_FILE}
++[ ! -r /etc/${SYSCONFIG_FILE} ] && [ -r ${SYSCONFIG_DIR}/${SYSCONFIG_FILE} ] && . ${SYSCONFIG_DIR}/${SYSCONFIG_FILE}
  
  umask ${UMASK}
  
@@ -58,13 +58,13 @@ diff --git a/sa2.in b/sa2.in
 index cd4f71f..5ebf279 100644
 --- a/sa2.in
 +++ b/sa2.in
-@@ -16,7 +16,8 @@ ZIP="@ZIP@"
- UMASK=0022
+@@ -18,7 +18,8 @@ ZIP="@ZIP@"
+ ENDIR=@SAR_DIR@
  
  # Read configuration file, overriding variables set above
--[ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
-+[ -r /etc/sysstat ] && . /etc/sysstat
-+[ ! -r /etc/sysstat ] && [ -r ${SYSCONFIG_DIR}/sysstat ] && . ${SYSCONFIG_DIR}/sysstat
+-[ -r ${SYSCONFIG_DIR}/${SYSCONFIG_FILE} ] && . ${SYSCONFIG_DIR}/${SYSCONFIG_FILE}
++[ -r /etc/${SYSCONFIG_FILE} ] && . /etc/${SYSCONFIG_FILE}
++[ ! -r /etc/${SYSCONFIG_FILE} ] && [ -r ${SYSCONFIG_DIR}/${SYSCONFIG_FILE} ] && . ${SYSCONFIG_DIR}/${SYSCONFIG_FILE}
  
  umask ${UMASK}
  

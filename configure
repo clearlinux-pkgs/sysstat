@@ -4,3 +4,4 @@
 --disable-install-cron
 --disable-stripping
 conf_dir=/usr/share/defaults/sysstat
+conf_file=sysstat
