@@ -1,8 +1,12 @@
 Configure miss: json_verify
 Configure miss: chkconfig
+Configure miss: pcp/pmapi.h usability
+Configure miss: pcp/pmapi.h presence
+Configure miss: pcp/pmapi.h
+Configure miss: pcp/impl.h usability
+Configure miss: pcp/impl.h presence
+Configure miss: pcp/impl.h
 Configure miss: sensors support
-Configure miss: pmGetVersion in -lpcp
-Configure miss: PCP libraries
 Configure miss: whether manual pages should be compressed
 Configure miss: whether system activity directory should be cleaned
 Configure miss: whether cron should start sar automatically
