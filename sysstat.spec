@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 12.2.0
-Release  : 55
+Release  : 56
 URL      : https://github.com/sysstat/sysstat/archive/v12.2.0/sysstat-12.2.0.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.2.0/sysstat-12.2.0.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
@@ -21,6 +21,7 @@ BuildRequires : pkgconfig(systemd)
 BuildRequires : systemd
 BuildRequires : systemd-dev
 Patch1: 0001-Add-stateless-support.patch
+Patch2: CVE-2019-19725.patch
 
 %description
 The sysstat package contains the sar, sadf, mpstat, iostat, tapestat,
@@ -104,13 +105,14 @@ services components for the sysstat package.
 %setup -q -n sysstat-12.2.0
 cd %{_builddir}/sysstat-12.2.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576097148
+export SOURCE_DATE_EPOCH=1576099091
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -129,7 +131,7 @@ conf_file=sysstat
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1576097148
+export SOURCE_DATE_EPOCH=1576099091
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sysstat
 cp %{_builddir}/sysstat-12.2.0/COPYING %{buildroot}/usr/share/package-licenses/sysstat/3127907a7623734f830e8c69ccee03b693bf993e
