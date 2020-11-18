@@ -1,4 +1,4 @@
-From 86891c8510cea28188d722575e85f24c73d00baa Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Douglas <william.douglas@intel.com>
 Date: Thu, 20 Sep 2018 12:22:28 -0700
 Subject: [PATCH] Add stateless support
@@ -12,39 +12,39 @@ Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
  4 files changed, 16 insertions(+), 7 deletions(-)
 
 diff --git a/ioconf.c b/ioconf.c
-index 940b0c5..4420527 100644
+index 94af735..4f00365 100644
 --- a/ioconf.c
 +++ b/ioconf.c
-@@ -150,13 +150,19 @@ int ioc_init(void)
+@@ -151,13 +151,19 @@ int ioc_init(void)
  	struct blk_config *blkp = NULL;
  	char ioconf_name[64];
  
 -	if ((fp = fopen(IOCONF, "r")) == NULL) {
 -		if ((fp = fopen(LOCAL_IOCONF, "r")) == NULL)
 -			return 0;
--		strncpy(ioconf_name, LOCAL_IOCONF, 64);
+-		strncpy(ioconf_name, LOCAL_IOCONF, sizeof(ioconf_name));
 +	if ((fp = fopen(ETC_IOCONF, "r")) == NULL) {
 +		if ((fp = fopen(IOCONF, "r")) == NULL) {
 +			if ((fp = fopen(LOCAL_IOCONF, "r")) == NULL) {
 +				return 0;
 +			} else {
-+				strncpy(ioconf_name, LOCAL_IOCONF, 64);
-+                        }
-+                } else {
-+                        strncpy(ioconf_name, IOCONF, 64);
-+                }
++				strncpy(ioconf_name, LOCAL_IOCONF, sizeof(ioconf_name));
++			}
++		} else {
++			strncpy(ioconf_name, IOCONF, sizeof(ioconf_name));
++		}
  	}
  	else {
--		strncpy(ioconf_name, IOCONF, 64);
-+		strncpy(ioconf_name, ETC_IOCONF, 64);
+-		strncpy(ioconf_name, IOCONF, sizeof(ioconf_name));
++		strncpy(ioconf_name, ETC_IOCONF, sizeof(ioconf_name));
  	}
- 	ioconf_name[63] = '\0';
+ 	ioconf_name[sizeof(ioconf_name) - 1] = '\0';
  
 diff --git a/sa1.in b/sa1.in
-index 79ed60c..0f3d634 100644
+index 4466dae..0bad4c6 100644
 --- a/sa1.in
 +++ b/sa1.in
-@@ -15,7 +15,8 @@ SA_DIR=@SA_DIR@
+@@ -15,7 +15,8 @@ SYSCONFIG_DIR=@SYSCONFIG_DIR@
  SYSCONFIG_FILE=@SYSCONFIG_FILE@
  UMASK=0022
  
@@ -55,11 +55,11 @@ index 79ed60c..0f3d634 100644
  umask ${UMASK}
  
 diff --git a/sa2.in b/sa2.in
-index cd4f71f..5ebf279 100644
+index 14eeab5..7a52b43 100644
 --- a/sa2.in
 +++ b/sa2.in
-@@ -18,7 +18,8 @@ ZIP="@ZIP@"
- ENDIR=@SAR_DIR@
+@@ -19,7 +19,8 @@ ENDIR=@SAR_DIR@
+ DELAY_RANGE=@DELAY_RANGE@
  
  # Read configuration file, overriding variables set above
 -[ -r ${SYSCONFIG_DIR}/${SYSCONFIG_FILE} ] && . ${SYSCONFIG_DIR}/${SYSCONFIG_FILE}
@@ -69,7 +69,7 @@ index cd4f71f..5ebf279 100644
  umask ${UMASK}
  
 diff --git a/sysconfig.in b/sysconfig.in
-index 93e6e0a..cfa3f67 100644
+index c947849..8ea5210 100644
 --- a/sysconfig.in
 +++ b/sysconfig.in
 @@ -9,5 +9,6 @@
@@ -79,6 +79,3 @@ index 93e6e0a..cfa3f67 100644
 +#define ETC_IOCONF	"/etc/sysstat.ioconf"
  
  #endif  /* _SYSCONFIG_H */
--- 
-2.21.0
-
