@@ -8,7 +8,6 @@ Configure miss: pcp/impl.h presence
 Configure miss: pcp/impl.h
 Configure miss: sensors support
 Configure miss: gettext in -lintl
-Configure miss: whether manual pages should not be compressed
 Configure miss: whether system activity directory should be cleaned
 Configure miss: whether cron should start sar automatically
 Configure miss: whether debug mode should be activated
