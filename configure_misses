@@ -6,6 +6,7 @@ Configure miss: pcp/pmapi.h
 Configure miss: pcp/impl.h usability
 Configure miss: pcp/impl.h presence
 Configure miss: pcp/impl.h
+Configure miss: PCP support
 Configure miss: sensors support
 Configure miss: gettext in -lintl
 Configure miss: whether system activity directory should be cleaned
