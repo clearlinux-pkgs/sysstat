@@ -1,5 +1,5 @@
 PKG_NAME := sysstat
-URL = https://github.com/sysstat/sysstat/archive/v12.5.3/sysstat-12.5.3.tar.gz
+URL = http://pagesperso-orange.fr/sebastien.godard/sysstat-12.5.4.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

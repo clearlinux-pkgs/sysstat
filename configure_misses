@@ -1,16 +1,16 @@
-Configure miss: json_verify
-Configure miss: chkconfig
-Configure miss: pcp/pmapi.h usability
-Configure miss: pcp/pmapi.h presence
-Configure miss: pcp/pmapi.h
-Configure miss: pcp/impl.h usability
-Configure miss: pcp/impl.h presence
-Configure miss: pcp/impl.h
-Configure miss: PCP support
-Configure miss: sensors support
-Configure miss: gettext in -lintl
 Configure miss: Link Time Optimization support
-Configure miss: whether system activity directory should be cleaned
+Configure miss: PCP support
+Configure miss: chkconfig
+Configure miss: gettext in -lintl
+Configure miss: json_verify
+Configure miss: pcp/impl.h
+Configure miss: pcp/impl.h presence
+Configure miss: pcp/impl.h usability
+Configure miss: pcp/pmapi.h
+Configure miss: pcp/pmapi.h presence
+Configure miss: pcp/pmapi.h usability
+Configure miss: sensors support
 Configure miss: whether cron should start sar automatically
 Configure miss: whether debug mode should be activated
 Configure miss: whether object files should be stripped
+Configure miss: whether system activity directory should be cleaned
