@@ -4,9 +4,9 @@
 #
 Name     : sysstat
 Version  : 12.5.4
-Release  : 63
-URL      : http://pagesperso-orange.fr/sebastien.godard/sysstat-12.5.4.tar.xz
-Source0  : http://pagesperso-orange.fr/sebastien.godard/sysstat-12.5.4.tar.xz
+Release  : 64
+URL      : https://github.com/sysstat/sysstat/archive/v12.5.4/sysstat-12.5.4.tar.gz
+Source0  : https://github.com/sysstat/sysstat/archive/v12.5.4/sysstat-12.5.4.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
 Group    : Development/Tools
 License  : GPL-2.0 MIT
@@ -110,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623088675
+export SOURCE_DATE_EPOCH=1623088220
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -129,7 +129,7 @@ conf_file=sysstat
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1623088675
+export SOURCE_DATE_EPOCH=1623088220
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sysstat
 cp %{_builddir}/sysstat-12.5.4/COPYING %{buildroot}/usr/share/package-licenses/sysstat/3127907a7623734f830e8c69ccee03b693bf993e
