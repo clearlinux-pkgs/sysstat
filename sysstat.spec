@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 12.6.0
-Release  : 67
+Release  : 68
 URL      : https://github.com/sysstat/sysstat/archive/v12.6.0/sysstat-12.6.0.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.6.0/sysstat-12.6.0.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
@@ -110,15 +110,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653849659
+export SOURCE_DATE_EPOCH=1664904919
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static --disable-sensors \
 --enable-nls \
 --disable-file-attr \
@@ -129,11 +129,11 @@ conf_file=sysstat
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1653849659
+export SOURCE_DATE_EPOCH=1664904919
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sysstat
-cp %{_builddir}/sysstat-12.6.0/COPYING %{buildroot}/usr/share/package-licenses/sysstat/3127907a7623734f830e8c69ccee03b693bf993e
-cp %{_builddir}/sysstat-12.6.0/contrib/irqstat/LICENSE %{buildroot}/usr/share/package-licenses/sysstat/eb93c122a87516d45e194a88122b874a019cf0f8
+cp %{_builddir}/sysstat-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sysstat/3127907a7623734f830e8c69ccee03b693bf993e || :
+cp %{_builddir}/sysstat-%{version}/contrib/irqstat/LICENSE %{buildroot}/usr/share/package-licenses/sysstat/eb93c122a87516d45e194a88122b874a019cf0f8 || :
 DESTDIR=%{buildroot} make install_all
 %find_lang sysstat
 ## Remove excluded files
