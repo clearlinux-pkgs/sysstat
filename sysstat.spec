@@ -4,7 +4,7 @@
 #
 Name     : sysstat
 Version  : 12.6.0
-Release  : 68
+Release  : 69
 URL      : https://github.com/sysstat/sysstat/archive/v12.6.0/sysstat-12.6.0.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.6.0/sysstat-12.6.0.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
@@ -110,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664904919
+export SOURCE_DATE_EPOCH=1664905030
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -124,12 +124,13 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 --disable-file-attr \
 --disable-install-cron \
 --disable-stripping \
+--enable-lto \
 conf_dir=/usr/share/defaults/sysstat \
 conf_file=sysstat
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1664904919
+export SOURCE_DATE_EPOCH=1664905030
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sysstat
 cp %{_builddir}/sysstat-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sysstat/3127907a7623734f830e8c69ccee03b693bf993e || :

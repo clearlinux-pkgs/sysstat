@@ -3,5 +3,6 @@
 --disable-file-attr
 --disable-install-cron
 --disable-stripping
+--enable-lto
 conf_dir=/usr/share/defaults/sysstat
 conf_file=sysstat
