@@ -7,7 +7,7 @@
 #
 Name     : sysstat
 Version  : 12.7.5
-Release  : 73
+Release  : 74
 URL      : https://github.com/sysstat/sysstat/archive/v12.7.5/sysstat-12.7.5.tar.gz
 Source0  : https://github.com/sysstat/sysstat/archive/v12.7.5/sysstat-12.7.5.tar.gz
 Summary  : SAR, SADF, MPSTAT, IOSTAT, TAPESTAT, PIDSTAT and CIFSIOSTAT for Linux
